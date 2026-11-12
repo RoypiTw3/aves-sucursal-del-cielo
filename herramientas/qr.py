@@ -23,7 +23,7 @@ SALIDA = os.path.join(RAIZ, 'qr')
 def aves():
     js = ("global.window={};require(" + json.dumps(os.path.join(SITIO, 'datos.js')) + ");"
           "console.log(JSON.stringify({p:window.PROYECTO,a:window.AVES.map(a=>({id:a.id,nombre:a.nombre,"
-          "cientifico:a.cientifico,fondo:a.fondo,tarjeta:a.tarjeta,foto:a.fotos[a.objs[0].f].src}))}))")
+          "cientifico:a.cientifico,fondo:a.fondo,tarjeta:a.tarjeta,foto:(a.ilus?a.ilus[1].src:a.fotos[a.objs[0].f].src)}))}))")
     return json.loads(subprocess.run(['node', '-e', js], capture_output=True, text=True, check=True).stdout)
 
 
