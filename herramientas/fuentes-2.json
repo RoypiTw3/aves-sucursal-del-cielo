@@ -1,0 +1,13 @@
+{
+ "fotos": [
+  {"ave":"azulejo","n":"c1","titulo":"File:Thraupis_episcopus_(Azulejo_común)_-_Flickr_-_Alejandro_Bayer.jpg","modo":"todas"},
+  {"ave":"azulejo","n":"c2","titulo":"File:Blue-grey_tanager_(Thraupis_episcopus_quaesita)_Las_Tangaras.jpg","modo":"todas"},
+  {"ave":"azulejo","n":"c3","titulo":"File:Thraupis_episcopus_(Azulejo_común)_(15048084552).jpg","modo":"mayor"},
+  {"ave":"azulejo","n":"c4","titulo":"File:Azulejo_de_Jardín_en_Colombia.jpg","modo":"todas"},
+  {"ave":"azulejo","n":"c5","titulo":"File:Thraupis_episcopus_(Azulejo_común)_(16155612838).jpg","modo":"todas"},
+  {"ave":"azulejo","n":"c6","titulo":"File:Thraupis_episcopus_-_Sasaima_Cundinamarca.jpg","modo":"mayor"}
+ ],
+ "cantos": [
+  {"ave":"azulejo","url":"https://xeno-canto.org/549443/download","inicio":0,"duracion":25}
+ ]
+}

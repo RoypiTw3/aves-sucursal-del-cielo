@@ -1,0 +1,6 @@
+# Programas compilados (se generan con swiftc desde los .swift)
+herramientas/recortar
+herramientas/igualar
+
+.DS_Store
+__pycache__/

@@ -1,0 +1,18 @@
+{
+ "fotos": [
+  {"ave":"bichofue","n":"c1","titulo":"File:Great_kiskadee_in_Costa_Rica_01.jpg","modo":"todas"},
+  {"ave":"bichofue","n":"c2","titulo":"File:Bichofué_Gritón_(Pitangus_sulphuratus)_Great_Kiskadee.jpg","modo":"todas"},
+  {"ave":"bichofue","n":"c3","titulo":"File:Pitangus_sulphuratus_(Bichofué_gritón)_(14611617391).jpg","modo":"mayor"},
+  {"ave":"bichofue","n":"c4","titulo":"File:Pitangus_sulphuratus_Bichofué_Great_Kiskadee_(16993027741).jpg","modo":"todas"},
+  {"ave":"bichofue","n":"c5","titulo":"File:Pitangus_sulphuratus_(45130285364).jpg","modo":"mayor"},
+  {"ave":"espatulilla","n":"c1","titulo":"File:Todirostrum_cinereum_Univalle,_Cali.jpg","modo":"todas"},
+  {"ave":"espatulilla","n":"c2","titulo":"File:Todirostrum_cinereum_(Espatulilla)_-_Flickr_-_Alejandro_Bayer.jpg","modo":"todas"},
+  {"ave":"espatulilla","n":"c3","titulo":"File:Todirostrum_cinereum_Espatulilla_común_Common_Tody-Flycatcher_(10677525776).jpg","modo":"todas"},
+  {"ave":"espatulilla","n":"c4","titulo":"File:Todirostrum_cinereum_Espatulilla_común_Common_Tody-Flycatcher_(12220025163).jpg","modo":"todas"},
+  {"ave":"espatulilla","n":"c5","titulo":"File:Todirostrum_cinereum_Espatulilla_común_Common_Tody-Flycatcher_(12197777795).jpg","modo":"todas"}
+ ],
+ "cantos": [
+  {"ave":"bichofue","url":"https://xeno-canto.org/549480/download","inicio":0,"duracion":25},
+  {"ave":"espatulilla","url":"https://xeno-canto.org/573575/download","inicio":0,"duracion":25}
+ ]
+}

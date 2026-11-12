@@ -1,0 +1,13 @@
+{
+ "fotos": [
+  {"ave":"pechirrojo","n":"c1","titulo":"File:Petirrojo,_Pyrocephalus_obscurus,_Desierto_de_la_Tatacoa,_Colombia.jpg","modo":"todas"},
+  {"ave":"pechirrojo","n":"c2","titulo":"File:Pyrocephalus_obscurus_Titiribí_pechirrojo_Vermilion_Flycatcher_(male),_Antioquia,_Colombia_(16191971851).jpg","modo":"mayor"},
+  {"ave":"pechirrojo","n":"c3","titulo":"File:Pyrocephalus_rubinus_Titiribí_pechirrojo_Vermilion_Flycatcher_(male)_(16772375234).jpg","modo":"todas"},
+  {"ave":"pechirrojo","n":"c4","titulo":"File:Pyrocephalus_rubinus_(Pechirrojo_Cardenal_Liberal...)_-_Hembra_(14030481042).jpg","modo":"mayor"},
+  {"ave":"pechirrojo","n":"c5","titulo":"File:Pyrocephalus_rubinus_(Pechirrojo,_Petirrojo,_Cardenal)_-_Hembra_(14292044412).jpg","modo":"mayor"},
+  {"ave":"pechirrojo","n":"c6","titulo":"File:Mosquero_Cardenal_-_Pyrocephalus_rubinus.jpg","modo":"mayor"}
+ ],
+ "cantos": [
+  {"ave":"pechirrojo","url":"https://xeno-canto.org/457290/download","inicio":0,"duracion":24}
+ ]
+}
