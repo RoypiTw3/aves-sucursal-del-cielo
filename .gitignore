@@ -4,3 +4,6 @@ herramientas/igualar
 
 .DS_Store
 __pycache__/
+
+# Archivos ocultos que crea macOS en discos externos
+._*
