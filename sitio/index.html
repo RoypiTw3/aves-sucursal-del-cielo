@@ -55,9 +55,9 @@ html:not(.m) #logo svg{width:max(28px,calc(34*var(--u)));height:max(28px,calc(34
 html.m #tabs,html.r-page #tabs{display:none}
 
 /* ---------- Botón Conocer ---------- */
-#disc{position:fixed;z-index:30;left:50%;bottom:calc(var(--sab) + 86px);transform:translateX(-50%);display:inline-flex;align-items:center;gap:12px;height:52px;padding:0 26px;border-radius:999px;background:var(--ink);color:var(--ivory);font-weight:500;font-size:16px;white-space:nowrap;box-shadow:0 14px 34px rgba(29,27,46,.2)}
-html[data-isla=arriba] #disc{bottom:calc(var(--sab) + 22px)}
-#disc svg{width:24px;height:12px;transition:transform .5s var(--e2)}
+#disc{position:fixed;z-index:30;left:50%;bottom:calc(var(--sab) + 100px);transform:translateX(-50%);display:inline-flex;align-items:center;gap:10px;height:42px;padding:0 20px;border-radius:999px;background:var(--ink);color:var(--ivory);font-weight:500;font-size:14.5px;white-space:nowrap;box-shadow:0 10px 26px rgba(29,27,46,.18)}
+html[data-isla=arriba] #disc{bottom:calc(var(--sab) + 24px)}
+#disc svg{width:20px;height:10px;transition:transform .5s var(--e2)}
 html:not(.m) #disc{bottom:auto;height:max(52px,calc(66*var(--u)));padding:0 max(26px,calc(38*var(--u)));font-size:max(15px,calc(17*var(--u)))}
 @media (hover:hover){#disc:hover svg{transform:translateX(6px)}}
 html.r-page #disc{display:none}
@@ -407,9 +407,10 @@ function layout() {
   cardEl.style.width = W + 'px'; cardEl.style.height = H + 'px';
   let fs;
   if (M) {
-    coeff = 1.5; dcx = 0; dcy = -0.1 * H;
+    coeff = 1; dcx = 0; dcy = -0.1 * H;
     headerH = SAT + 64;
-    uiTop = H - (ISLA === 'abajo' ? SAB + 12 + 60 + 14 + 52 + 14 : SAB + 22 + 52 + 14);
+    // Espacio que ocupan abajo el botón (42 px) y la isla (60 px + márgenes)
+    uiTop = H - (ISLA === 'abajo' ? SAB + 100 + 42 + 14 : SAB + 24 + 42 + 14);
     fs = Math.min(0.13125 * W, 0.066 * H, 64);
     card.w = Math.min(0.78 * W, 440); card.x = (W - card.w) / 2;
     card.h = Math.min(1.2675 * card.w, 0.6 * H); card.y = SAT + 70;
@@ -487,7 +488,7 @@ function frame(now) {
   if (!stageOn) return;
   if (S.trans) S.smooth = S.goto;
   else {
-    S.smooth += (S.goto - S.smooth) * (S.drag ? 0.3 : 0.08);
+    S.smooth += (S.goto - S.smooth) * (S.drag ? 0.3 : 0.12);
     if (Math.abs(S.goto - S.smooth) < 1e-4) S.smooth = S.goto;
     const ni = real(Math.round(S.smooth));
     if (ni !== S.int) { S.int = ni; onChange(); }
@@ -515,19 +516,24 @@ function frame(now) {
     }
     if (!vis) continue;
     const dy = n * H * coeff;
-    s.t.style.transform = 'translate3d(' + (s.cx - s.tw / 2 + rc * dcx) + 'px,' + (s.cy - s.th / 2 + rc * dcy + dy) + 'px,0)';
-    s.t.style.opacity = r * al;
+    // Al salir de pantalla las figuras y el nombre se desvanecen y se achican un poco: el cambio se ve más suave
+    const an = Math.abs(n);
+    let op = clamp(1 - (an - 0.08) / 0.62, 0, 1); op = op * op * (3 - 2 * op);
+    const enc = 1 - 0.07 * an;
+    s.t.style.transform = 'translate3d(' + (s.cx - s.tw / 2 + rc * dcx) + 'px,' + (s.cy - s.th / 2 + rc * dcy + dy * 0.85) + 'px,0)';
+    s.t.style.opacity = r * al * op;
     for (let k = 0; k < s.objs.length; k++) {
       const ob = s.objs[k];
       const tx = FINE ? mouse.x * ob.ratio * r : 0, ty = FINE ? mouse.y * ob.ratio * r : 0;
       ob.md.x += (tx - ob.md.x) * mr; ob.md.y += (ty - ob.md.y) * mr;
       const bob = RM ? 0 : Math.sin(now / 1000 * 1.15 + ob.ph) * (M ? 5 : 7) * r;
-      const w = lerp(ob.hm.w, ob.c.w, rc), h = w / ob.ar, sc = w / ob.c.w;
-      const x = lerp(ob.hm.x, ob.c.x, rc) + ob.md.x;
+      const w = lerp(ob.hm.w, ob.c.w, rc) * enc, h = w / ob.ar, sc = w / ob.c.w;
+      const x = lerp(ob.hm.x, ob.c.x, rc) + ob.md.x + (lerp(ob.hm.w, ob.c.w, rc) - w) / 2;
       const yb = lerp(ob.hm.y, ob.c.y, rc) + dy * ob.o.sp + ob.md.y;
       ob.el.style.transform = 'translate3d(' + x + 'px,' + (yb + bob) + 'px,0) scale(' + sc + ')';
+      ob.el.style.opacity = op;
       ob.sh.style.transform = 'translate3d(' + (x + 0.19 * w) + 'px,' + (yb + 1.02 * h + 0.03 * H * r) + 'px,0) scale(' + sc + ')';
-      ob.sh.style.opacity = al * (0.55 + 0.45 * r) * (ob.back ? 0.6 : 1);
+      ob.sh.style.opacity = al * (0.55 + 0.45 * r) * (ob.back ? 0.6 : 1) * op;
     }
   }
   const ui = r * r * r * al;
@@ -563,7 +569,7 @@ function onChange() {
   disc.href = '#/' + a.id;
   disc.setAttribute('aria-label', 'Conocer: ' + a.nombre);
   t0 = performance.now();
-  gsap.to(bgEl, { backgroundColor: a.fondo, duration: RM ? 0 : (S.trans ? (M ? 1.6 : 2.5) : 0.8), ease: S.trans ? 'power4.inOut' : 'none', overwrite: true });
+  gsap.to(bgEl, { backgroundColor: a.fondo, duration: RM ? 0 : (S.trans ? DUR() : 0.6), ease: S.trans ? 'power2.inOut' : 'none', overwrite: true });
   meta.setAttribute('content', a.fondo);
   loadImgs(i); loadImgs(i + 1); loadImgs(i - 1);
   if (route.name === 'home') live.textContent = a.nombre;
@@ -578,13 +584,15 @@ function gotoIdx(t, user) {
   if (tt - S.goto > N / 2) tt -= N; else if (S.goto - tt > N / 2) tt += N;
   S.trans = true;
   if (real(tt) !== S.int) { S.int = real(tt); onChange(); }
-  gsap.to(S, { goto: tt, duration: RM ? 0 : (M ? 1.6 : 2.5), ease: 'power4.inOut', onComplete: () => { S.trans = false; t0 = performance.now(); } });
+  gsap.to(S, { goto: tt, duration: RM ? 0 : DUR(), ease: 'power3.inOut', onComplete: () => { S.trans = false; t0 = performance.now(); } });
 }
+// Duración del cambio de ave: corto en celular para que se sienta ágil
+function DUR() { return M ? 1.0 : 1.5; }
 function settle(tgt) {
   gsap.killTweensOf(S, 'goto');
   S.goto = S.smooth; S.trans = true;
   if (real(tgt) !== S.int) { S.int = real(tgt); onChange(); }
-  gsap.to(S, { goto: tgt, duration: RM ? 0 : (M ? 0.9 : 1.1), ease: 'power3.out', onComplete: () => { S.trans = false; t0 = performance.now(); } });
+  gsap.to(S, { goto: tgt, duration: RM ? 0 : (M ? 0.65 : 0.8), ease: 'power3.out', onComplete: () => { S.trans = false; t0 = performance.now(); } });
 }
 function setStageIdx(i) {
   gsap.killTweensOf(S, 'goto');
@@ -655,7 +663,7 @@ addEventListener('wheel', e => {
   const now = performance.now();
   if (now < wLock) return;
   wAcc += Math.abs(e.deltaY) >= Math.abs(e.deltaX) ? e.deltaY : e.deltaX;
-  if (Math.abs(wAcc) > 40) { gotoIdx(S.int + Math.sign(wAcc)); wAcc = 0; wLock = now + 900; }
+  if (Math.abs(wAcc) > 40) { gotoIdx(S.int + Math.sign(wAcc)); wAcc = 0; wLock = now + 700; }
 }, { passive: false });
 addEventListener('keydown', e => {
   if (e.key === 'Escape') closeIsla();
